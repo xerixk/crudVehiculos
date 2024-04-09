@@ -86,6 +86,16 @@ class Usuario{
             return false;
         }
     }
+    public function usuVehiculos($vehiculo_id){
+        
+            $sql= "SELECT u.* FROM usuarios u INNER JOIN vehiculos v ON u.vehiculo_id = v.id WHERE v.id = $vehiculo_id";
+            $stmt=$this->conn->prepare($sql);
+            $stmt->execute();
+            $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $datos;
+        
+    }
+
 }
 
 
@@ -94,5 +104,5 @@ $nombre="Rober";
 $vehiculo_id=2;
 
 $u= new Usuario();
-var_dump($u->crear($nombre,$dni,$vehiculo_id));
+var_dump($u->usuVehiculos(1));
 ?>
